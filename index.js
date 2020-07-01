@@ -7,6 +7,9 @@ const validate = require('./src/validate')
 const hijack = require('./src/hijack')
 
 app.use(bodyParser.json())
+app.get('/', (req, res) => res.send('ok..'))
+app.get('/favicon.ico', (req, res) => res.send('ok...'))
+
 app.get('/webhook', validate)
 app.post('/webhook', hijack)
 
