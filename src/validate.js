@@ -1,3 +1,3 @@
 module.exports = (req, res) => {
-    return res.send(res.query['hub.challenge'])
+    return res.send(req.query['hub.challenge'])
 }
