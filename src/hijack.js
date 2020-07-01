@@ -1,8 +1,7 @@
 const rp = require('request-promise');
 
-module.exports = async (req, res) => {
-
-  try {
+module.exports = async (req, res) => {  
+  if (req.body.object === 'page') {
     console.log('--sending..')
     await rp({
       method: 'POST',
@@ -10,9 +9,8 @@ module.exports = async (req, res) => {
       body: req.body,
       json: true
    })
-   console.log('----send to chat succeed.')
-  } catch (error) {
-    console.log('send to cha fail', error.message || error)
+   .then(() => console.log('----send to chat succeed.'))
+   .catch((error) => console.log('send to cha fail', error.message || error))
   }
   
   console.log('--------------------------------------------');
