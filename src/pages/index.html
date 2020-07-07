@@ -30,7 +30,8 @@
             console.log('FB.login response', response);
             accessToken = response.authResponse.accessToken
         }, {
-            scope: 'email, publish_video, publish_to_groups',
+            // scope: 'email, publish_video, publish_to_groups',
+            scope: 'email,id',
             return_scopes: true
         });
 
