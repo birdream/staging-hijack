@@ -2,14 +2,22 @@
 
 <html>
     <div>Hello, this is a index page!!!</div>
-    <div>
-        <a href="#" id="logout-btn">Log out</a>
-    </div>
-
+    <div></div>
+    <div></div>
     <div>
         <a href="#" id="req-more-btn">Request More</a>
     </div>
-    
+    <div></div>
+    <div></div>
+    <div>
+        <a href="#" id="logout-btn">Log out</a>
+    </div>
+    <div></div>
+    <div></div>
+    <div>
+        <a href="#" id="gl-btn">get group list</a>
+        <div id='gl'></div>
+    </div>
 </html>
 
 <script>
@@ -23,13 +31,18 @@
       });
     };
 
+    const scop = [
+        'email',
+        'publish_video',
+        'publish_to_groups',
+        'groups_access_member_info'
+    ]
     document.getElementById('req-more-btn').onclick = function() {
         FB.login(function(response) {
             console.log('FB.login response', response);
             // accessToken = response.authResponse.accessToken
         }, {
-            // scope: 'email, publish_video, publish_to_groups',
-            scope: 'email',
+            scope: scop.join(','),
             return_scopes: true
         });
 
@@ -40,6 +53,15 @@
         FB.logout(function(response) {
             console.log('FB.logout response', response);
         }, { access_token: accessToken });
+
+        return false;
+    }
+
+    document.getElementById('gl-btn').onclick = function() {
+        FB.api('/me?fields=id,email,groups{member_count,owner,name}', (resp) => {
+            console.log(resp)
+            document.getElementById('gl').innerHTML = resp
+        });
 
         return false;
     }
