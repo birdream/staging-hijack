@@ -17,19 +17,19 @@
     <div>
         <input id='g-input'/>
         <a href="#" id="getLiveInGroupBtn">get live in group</a>
-        <div id='liveInfo'></div>
+        <pre id='liveInfo'></pre>
     </div>
     <br/>
     <div>
         <input id='gInput1'/>
         <a href="#" id="createLiveInGroupBtn">create live in group</a>
-        <div id='createLiveResp'></div>
+        <pre id='createLiveResp'></pre>
     </div>
     <br/>
     <div>
         <input id='gInput2'/>
         <a href="#" id="endLiveInGroupBtn">end live in group</a>
-        <div id='endLiveResp'></div>
+        <pre id='endLiveResp'></pre>
     </div>
 </html>
 
@@ -92,7 +92,7 @@
         const groupId = document.getElementById("g-input").value
         FB.api(`/${groupId}/live_videos`, (resp) => {
             console.log(resp)
-            document.getElementById('liveInfo').innerHTML = JSON.stringify(resp, null, 2)
+            document.getElementById('liveInfo').innerHTML = JSON.stringify(resp.data, null, 2)
             // renderGroups(document.getElementById('gl'), resp.groups.data)
         });
 
