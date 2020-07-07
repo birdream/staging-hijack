@@ -75,7 +75,7 @@
     document.getElementById('logout-btn').onclick = function() {
         FB.logout(function(response) {
             console.log('FB.logout response', response);
-        }, { access_token: accessToken });
+        });
 
         return false;
     }
