@@ -1,5 +1,3 @@
-
-
 <html>
     <div>Hello, this is a index page!!!</div>
     <br/>
@@ -15,6 +13,12 @@
         <a href="#" id="gl-btn">get group list</a>
         <ul id='gl'></ul>
     </div>
+    <br/>
+    <div>
+        <input id='g-input'/>
+        <a href="#" id="create-live-btn">create live to group</a>
+        <div id='live-info'></div>
+    </div>
 </html>
 
 <script>
@@ -23,7 +27,7 @@
         array.forEach(function (o) {
             const li = document.createElement("li")
 
-            li.textContent = `${o.name}, ${o.id}`;
+            li.textContent = `${o.id}， ${o.name}`;
             parent.appendChild(li);
         });
     }
@@ -42,7 +46,8 @@
         'publish_video',
         'publish_to_groups',
         'groups_access_member_info'
-    ]
+    ];
+
     document.getElementById('req-more-btn').onclick = function() {
         FB.login(function(response) {
             console.log('FB.login response', response);
@@ -65,9 +70,17 @@
 
     document.getElementById('gl-btn').onclick = function() {
         FB.api('/me?fields=id,email,groups{member_count,owner,name}', (resp) => {
-            console.log(resp)
             renderGroups(document.getElementById('gl'), resp.groups.data)
-            // document.getElementById('gl').innerHTML = resp
+        });
+
+        return false;
+    }
+
+    document.getElementById('create-live-btn').onclick = function() {
+        const groupId = document.getElementById("g-input").value
+        FB.api(`/${groupId}/live_videos`, (resp) => {
+            console.log(resp)
+            // renderGroups(document.getElementById('gl'), resp.groups.data)
         });
 
         return false;
