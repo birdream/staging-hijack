@@ -22,13 +22,13 @@
     <br/>
     <div>
         <input id='gInput1'/>
-        <a href="#" id="createLiveInGroupBtn">get live in group</a>
+        <a href="#" id="createLiveInGroupBtn">create live in group</a>
         <div id='createLiveResp'></div>
     </div>
     <br/>
     <div>
         <input id='gInput2'/>
-        <a href="#" id="endLiveInGroupBtn">get live in group</a>
+        <a href="#" id="endLiveInGroupBtn">end live in group</a>
         <div id='endLiveResp'></div>
     </div>
 </html>
@@ -92,6 +92,7 @@
         const groupId = document.getElementById("g-input").value
         FB.api(`/${groupId}/live_videos`, (resp) => {
             console.log(resp)
+            document.getElementById('liveInfo').innerHTML = JSON.stringify(resp, null, 2)
             // renderGroups(document.getElementById('gl'), resp.groups.data)
         });
 
@@ -102,6 +103,7 @@
         const groupId = document.getElementById("gInput1").value
         FB.api(`/${groupId}/live_videos`, 'post', (resp) => {
             console.log(resp)
+            document.getElementById('createLiveResp').innerHTML = JSON.stringify(resp, null, 2)
         });
 
         return false;
@@ -111,6 +113,7 @@
         const videoId = document.getElementById("gInput2").value
         FB.api(`/${videoId}?end_live_video=true`, (resp) => {
             console.log(resp)
+            document.getElementById('endLiveResp').innerHTML = JSON.stringify(resp, null, 2)
         });
 
         return false;
