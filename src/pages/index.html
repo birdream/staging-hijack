@@ -114,7 +114,7 @@
 
     document.getElementById('endLiveInGroupBtn').onclick = function() {
         const videoId = document.getElementById("gInput2").value
-        FB.api(`/${videoId}?end_live_video=true`, 'post', (resp) => {
+        FB.api(`/${videoId}`, 'post', {end_live_video: true}, (resp) => {
             console.log(resp)
             document.getElementById('endLiveResp').innerHTML = JSON.stringify(resp, null, 2)
         });
