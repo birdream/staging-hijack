@@ -16,8 +16,20 @@
     <br/>
     <div>
         <input id='g-input'/>
-        <a href="#" id="create-live-btn">create live to group</a>
-        <div id='live-info'></div>
+        <a href="#" id="getLiveInGroupBtn">get live in group</a>
+        <div id='liveInfo'></div>
+    </div>
+    <br/>
+    <div>
+        <input id='gInput1'/>
+        <a href="#" id="createLiveInGroupBtn">get live in group</a>
+        <div id='createLiveResp'></div>
+    </div>
+    <br/>
+    <div>
+        <input id='gInput2'/>
+        <a href="#" id="endLiveInGroupBtn">get live in group</a>
+        <div id='endLiveResp'></div>
     </div>
 </html>
 
@@ -76,11 +88,29 @@
         return false;
     }
 
-    document.getElementById('create-live-btn').onclick = function() {
+    document.getElementById('getLiveInGroupBtn').onclick = function() {
         const groupId = document.getElementById("g-input").value
         FB.api(`/${groupId}/live_videos`, (resp) => {
             console.log(resp)
             // renderGroups(document.getElementById('gl'), resp.groups.data)
+        });
+
+        return false;
+    }
+
+    document.getElementById('createLiveInGroupBtn').onclick = function() {
+        const groupId = document.getElementById("gInput1").value
+        FB.api(`/${groupId}/live_videos`, 'post', (resp) => {
+            console.log(resp)
+        });
+
+        return false;
+    }
+
+    document.getElementById('endLiveInGroupBtn').onclick = function() {
+        const videoId = document.getElementById("gInput2").value
+        FB.api(`/${videoId}?end_live_video=true`, (resp) => {
+            console.log(resp)
         });
 
         return false;
