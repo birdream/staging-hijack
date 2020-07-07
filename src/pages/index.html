@@ -92,8 +92,11 @@
         const groupId = document.getElementById("g-input").value
         FB.api(`/${groupId}/live_videos`, (resp) => {
             console.log(resp)
-            document.getElementById('liveInfo').innerHTML = JSON.stringify(resp.data, null, 2)
-            // renderGroups(document.getElementById('gl'), resp.groups.data)
+            if (resp.data) {
+                document.getElementById('liveInfo').innerHTML = JSON.stringify(resp.data, null, 2)
+            } else {
+                document.getElementById('liveInfo').innerHTML = JSON.stringify(resp, null, 2)
+            }
         });
 
         return false;
