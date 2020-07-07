@@ -19,6 +19,21 @@
 
 <script>
     // let accessToken = ''
+    function renderGroups(parent, array) {
+        array.forEach(function (o) {
+            var li = document.createElement("li"),
+                ul;
+
+            li.textContent = `${o.name}, ${o.id}`;
+            parent.appendChild(li);
+            if (o.nest) {
+                ul = document.createElement("ul");
+                li.appendChild(ul);
+                renderGroups(ul, o.nest);
+            }
+        });
+    }
+
     window.fbAsyncInit = function() {
       FB.init({
         appId            : '720037978808045',
@@ -56,8 +71,8 @@
 
     document.getElementById('gl-btn').onclick = function() {
         FB.api('/me?fields=id,email,groups{member_count,owner,name}', (resp) => {
-            console.log(resp)
-            document.getElementById('gl').innerHTML = resp
+            renderGroups(document.getElementById('gl'), resp.groups.data)
+            // document.getElementById('gl').innerHTML = resp
         });
 
         return false;
