@@ -2,15 +2,15 @@
     <div>Hello, this is a index page!!!</div>
     <br/>
     <div>
-        <a href="#" id="req-more-btn">Request More</a>
+        <a href="#" id="reqMoreBtn">Request More</a>
     </div>
     <br/>
     <div>
-        <a href="#" id="logout-btn">Log out</a>
+        <a href="#" id="logoutBtn">Log out</a>
     </div>
     <br/>
     <div>
-        <a href="#" id="gl-btn">get group list</a>
+        <a href="#" id="GroupListBtn">get group list</a>
         <ul id='gl'></ul>
     </div>
     <br/>
@@ -39,7 +39,7 @@
         array.forEach(function (o) {
             const li = document.createElement("li")
 
-            li.textContent = `${o.id}， ${o.name}`;
+            li.textContent = `${o.id}, ${o.name}`;
             parent.appendChild(li);
         });
     }
@@ -54,13 +54,12 @@
     };
 
     const scop = [
-        'email',
         'publish_video',
         'publish_to_groups',
         'groups_access_member_info'
     ];
 
-    document.getElementById('req-more-btn').onclick = function() {
+    document.getElementById('reqMoreBtn').onclick = function() {
         FB.login(function(response) {
             console.log('FB.login response', response);
             // accessToken = response.authResponse.accessToken
@@ -72,7 +71,7 @@
         return false;
     }
 
-    document.getElementById('logout-btn').onclick = function() {
+    document.getElementById('logoutBtn').onclick = function() {
         FB.logout(function(response) {
             console.log('FB.logout response', response);
         });
@@ -80,7 +79,7 @@
         return false;
     }
 
-    document.getElementById('gl-btn').onclick = function() {
+    document.getElementById('GroupListBtn').onclick = function() {
         FB.api('/me?fields=id,email,groups{member_count,owner,name}', (resp) => {
             renderGroups(document.getElementById('gl'), resp.groups.data)
         });
