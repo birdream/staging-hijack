@@ -25,6 +25,7 @@ app.post('/ig/login', live.login)
 app.get('/ig/live/prepare', live.prepareLive)
 app.get('/ig/live/start', live.startLive)
 app.get('/ig/live/end', live.endLive)
-// app.get('/webhook', live.)
+app.get('/ig/live/common', live.getCommon)
+app.post('/ig/live/common', live.postCommon)
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))

@@ -71,12 +71,31 @@ const endLive = async function(req, res) {
 }
 // const getCommon
 
+const getCommon = async function(req, res) {
+    const {
+        broadcast_id: broadcastId
+    } = req.query;
 
+    const { comments } = await ig.live.getComment({ broadcastId, lastCommentTs: 0 });
+
+    res.send(comments)
+}
+
+const postCommon = async function(req, res) {
+    const {
+        broadcast_id, common = 'default comm'
+    } = req.query;
+
+    await ig.live.comment(broadcast_id, common);
+
+    res.send('ok')
+}
 
 module.exports = {
     login,
     prepareLive,
     startLive,
     endLive,
-    // getCommon,
+    getCommon,
+    postCommon
 }
